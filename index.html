@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Modern hoveniersbedrijf voor tuinontwerp, aanleg en onderhoud." />
+  <title>Groen & Co Hoveniers | Tuinontwerp, Aanleg en Onderhoud</title>
+  <style>
+    :root {
+      --green-900: #123524;
+      --green-800: #1b4d35;
+      --green-700: #256d47;
+      --green-100: #eaf5ee;
+      --cream: #fbf7ef;
+      --sand: #e8dcc8;
+      --text: #1f2933;
+      --muted: #65737e;
+      --white: #ffffff;
+      --shadow: 0 20px 50px rgba(18, 53, 36, 0.14);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(251, 247, 239, 0.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(18, 53, 36, 0.08);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      color: var(--green-900);
+      letter-spacing: -0.03em;
+      font-size: 1.15rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--green-800), var(--green-700));
+      color: var(--white);
+      box-shadow: 0 10px 24px rgba(37, 109, 71, 0.24);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-weight: 650;
+      color: var(--green-900);
+    }
+
+    .nav-links a {
+      opacity: 0.82;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--green-700);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: var(--green-800);
+      box-shadow: 0 16px 30px rgba(27, 77, 53, 0.24);
+    }
+
+    .btn-primary:hover {
+      background: var(--green-900);
+    }
+
+    .btn-secondary {
+      color: var(--green-900);
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(18, 53, 36, 0.14);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 92px 0 76px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 540px;
+      height: 540px;
+      right: -180px;
+      top: -160px;
+      background: radial-gradient(circle, rgba(37, 109, 71, 0.22), rgba(37, 109, 71, 0));
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.04fr 0.96fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green-800);
+      background: var(--green-100);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green-700);
+      box-shadow: 0 0 0 6px rgba(37, 109, 71, 0.12);
+    }
+
+    h1 {
+      max-width: 760px;
+      color: var(--green-900);
+      font-size: clamp(2.7rem, 7vw, 5.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+      margin-bottom: 26px;
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.18rem;
+      color: var(--muted);
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 38px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 650px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(18, 53, 36, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--green-900);
+      font-size: 1.5rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 650;
+      font-size: 0.92rem;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 620px;
+      border-radius: 42px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: linear-gradient(160deg, rgba(18, 53, 36, 0.08), rgba(255, 255, 255, 0.4));
+      isolation: isolate;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+              linear-gradient(to top, rgba(18, 53, 36, 0.76), rgba(18, 53, 36, 0.05) 55%),
+              url("https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1200&q=80") center/cover;
+      z-index: -2;
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+      padding: 24px;
+      border-radius: 28px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(18px);
+    }
+
+    .floating-card h2 {
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .floating-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1rem;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 38px;
+    }
+
+    .section-label {
+      color: var(--green-700);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.76rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      color: var(--green-900);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.03;
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+    }
+
+    .section-header p,
+    .about-copy p,
+    .service-card p,
+    .process-card p {
+      color: var(--muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card,
+    .process-card,
+    .contact-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(18, 53, 36, 0.08);
+      box-shadow: 0 14px 36px rgba(18, 53, 36, 0.07);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: var(--green-100);
+      color: var(--green-800);
+      font-size: 1.45rem;
+      margin-bottom: 22px;
+    }
+
+    .service-card h3,
+    .process-card h3,
+    .contact-card h3 {
+      color: var(--green-900);
+      font-size: 1.22rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .about {
+      background: var(--green-900);
+      color: var(--white);
+      border-radius: 48px 48px 0 0;
+    }
+
+    .about h2,
+    .about .section-label {
+      color: var(--white);
+    }
+
+    .about .section-label {
+      opacity: 0.76;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .about-image {
+      min-height: 520px;
+      border-radius: 36px;
+      background:
+              linear-gradient(to top, rgba(18, 53, 36, 0.3), rgba(18, 53, 36, 0)),
+              url("https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1000&q=80") center/cover;
+      box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+    }
+
+    .about-copy p {
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 1.08rem;
+      margin-bottom: 18px;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .value {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .value strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+    }
+
+    .value span {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.95rem;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: var(--white);
+      background: var(--green-800);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    .cta {
+      padding: 88px 0 110px;
+      background: linear-gradient(135deg, var(--sand), var(--green-100));
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 32px;
+      padding: 42px;
+      background: var(--white);
+    }
+
+    .contact-card h2 {
+      margin-bottom: 14px;
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-detail {
+      padding: 18px;
+      border-radius: 20px;
+      background: var(--cream);
+      color: var(--green-900);
+      font-weight: 750;
+    }
+
+    footer {
+      padding: 32px 0;
+      color: rgba(255, 255, 255, 0.72);
+      background: var(--green-900);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .about-grid,
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .about-image {
+        min-height: 460px;
+      }
+
+      .services-grid,
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .nav {
+        min-height: auto;
+        padding: 16px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 58px 0 54px;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 15vw, 4.2rem);
+      }
+
+      .stats,
+      .services-grid,
+      .process-grid,
+      .values {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+
+      .about {
+        border-radius: 32px 32px 0 0;
+      }
+
+      .contact-card {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="Naar de hoofdpagina">
+      <span class="brand-mark">☘</span>
+      <span>Groen & Co Hoveniers</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Hoofdnavigatie">
+      <a href="#home">Home</a>
+      <a href="#diensten">Diensten</a>
+      <a href="#over-ons">Over ons</a>
+      <a href="#werkwijze">Werkwijze</a>
+    </nav>
+
+    <a class="btn btn-primary" href="mailto:info@groenenco.nl">Offerte aanvragen</a>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow"><span></span> Hoveniers met oog voor detail</div>
+        <h1>Tuinen die rust, sfeer en karakter brengen.</h1>
+        <p>
+          Van strak tuinontwerp tot complete aanleg en betrouwbaar onderhoud: wij maken buitenruimtes die passen bij jouw woning, leven en seizoen.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">Plan een kennismaking</a>
+          <a class="btn btn-secondary" href="#over-ons">Lees over ons</a>
+        </div>
+
+        <div class="stats" aria-label="Bedrijfsstatistieken">
+          <div class="stat">
+            <strong>15+</strong>
+            <span>jaar ervaring</span>
+          </div>
+          <div class="stat">
+            <strong>280+</strong>
+            <span>tuinen gerealiseerd</span>
+          </div>
+          <div class="stat">
+            <strong>4.9/5</strong>
+            <span>klantwaardering</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Sfeervolle moderne tuin">
+        <div class="floating-card">
+          <h2>Alles voor een gezonde, groene tuin</h2>
+          <p>Ontwerp, aanleg, beplanting, bestrating, veranda’s, beregening en seizoensonderhoud.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="diensten">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Onze diensten</div>
+        <h2>Van eerste schets tot jarenlang tuinplezier.</h2>
+        <p>Wij combineren vakmanschap met moderne materialen, slimme indeling en beplanting die past bij de bodem, ligging en jouw wensen.</p>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card">
+          <div class="icon">✦</div>
+          <h3>Tuinontwerp</h3>
+          <p>Een helder plan met indeling, sfeer, beplanting en materialen. Praktisch, mooi en toekomstbestendig.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon">▧</div>
+          <h3>Tuinaanleg</h3>
+          <p>Van grondwerk en bestrating tot borders, gazon, schuttingen en verlichting. Alles strak afgewerkt.</p>
+        </article>
+
+        <article class="service-card">
+          <div class="icon">♧</div>
+          <h3>Tuinonderhoud</h3>
+          <p>Periodiek onderhoud, snoeiwerk, bemesting en seizoensklaar maken voor een tuin die blijft groeien.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="over-ons">
+    <div class="container about-grid">
+      <div class="about-image" aria-label="Hovenier aan het werk in een groene tuin"></div>
+      <div class="about-copy">
+        <div class="section-label">Over ons</div>
+        <h2>Een betrokken hoveniersbedrijf met liefde voor buitenleven.</h2>
+        <p>
+          Groen & Co Hoveniers is ontstaan vanuit een simpele overtuiging: een tuin moet niet alleen mooi zijn, maar ook prettig voelen. Een plek om te ontspannen, samen te zijn en elk seizoen opnieuw van te genieten.
+        </p>
+        <p>
+          We werken met korte lijnen, duidelijke afspraken en materialen die lang meegaan. Of het nu gaat om een complete tuinrenovatie of structureel onderhoud, wij denken mee vanaf het eerste idee tot de laatste plant in de grond staat.
+        </p>
+
+        <div class="values">
+          <div class="value">
+            <strong>Persoonlijk advies</strong>
+            <span>We luisteren eerst, ontwerpen daarna.</span>
+          </div>
+          <div class="value">
+            <strong>Duurzame keuzes</strong>
+            <span>Meer biodiversiteit, minder verspilling.</span>
+          </div>
+          <div class="value">
+            <strong>Strakke planning</strong>
+            <span>Duidelijke fases en heldere communicatie.</span>
+          </div>
+          <div class="value">
+            <strong>Netjes opgeleverd</strong>
+            <span>Vakwerk tot in de afwerking.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="werkwijze">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Werkwijze</div>
+        <h2>Zo maken we jouw droomtuin concreet.</h2>
+        <p>Een soepel proces met één vast aanspreekpunt en duidelijke stappen.</p>
+      </div>
+
+      <div class="process-grid">
+        <article class="process-card">
+          <div class="step">1</div>
+          <h3>Kennismaking</h3>
+          <p>We bespreken wensen, stijl, budget en praktische mogelijkheden.</p>
+        </article>
+        <article class="process-card">
+          <div class="step">2</div>
+          <h3>Ontwerp & offerte</h3>
+          <p>Je ontvangt een helder voorstel met materialen, planning en prijs.</p>
+        </article>
+        <article class="process-card">
+          <div class="step">3</div>
+          <h3>Aanleg</h3>
+          <p>Ons team voert het werk zorgvuldig uit en houdt je op de hoogte.</p>
+        </article>
+        <article class="process-card">
+          <div class="step">4</div>
+          <h3>Onderhoud</h3>
+          <p>We helpen je tuin gezond, netjes en mooi in balans te houden.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="container">
+      <div class="contact-card">
+        <div>
+          <div class="section-label">Contact</div>
+          <h2>Klaar om jouw tuin aan te pakken?</h2>
+          <p>Stuur ons een bericht voor een vrijblijvende kennismaking. We reageren meestal binnen één werkdag.</p>
+          <br />
+          <a class="btn btn-primary" href="mailto:info@groenenco.nl?subject=Offerteaanvraag%20tuin">Vraag een offerte aan</a>
+        </div>
+
+        <div class="contact-details">
+          <div class="contact-detail">📍 Werkgebied: jouw regio</div>
+          <div class="contact-detail">✉️ info@groenenco.nl</div>
+          <div class="contact-detail">☎️ 06 12 34 56 78</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Groen & Co Hoveniers. Alle rechten voorbehouden.</span>
+    <span>Tuinontwerp · Tuinaanleg · Tuinonderhoud</span>
+  </div>
+</footer>
+</body>
+</html>
